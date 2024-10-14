@@ -1,16 +1,16 @@
 <?php
 /*
- * Plugin Name:       Product Variation Table With Quick Cart
- * Plugin URI:        https://example.com/plugins/the-basics/
+ * Plugin Name:       Product Variation Table With Quick Cart For WooCommerce
+ * Plugin URI:        https://github.com/woo-xperto/product-variations-table-with-quick-cart-for-woocommerce
  * Description:       Handle the quick woocommerce product variations in WP.
  * Version:           1.0.0
  * Requires at least: 5.2
  * Requires PHP:      7.2
- * Author:            Rihan Habib
- * Author URI:        https://author.example.com/
+ * Author:            WooXperto
+ * Author URI:        https://www.wooxperto.com/
  * License:           GPL v2 or later
  * License URI:       https://www.gnu.org/licenses/gpl-2.0.html
- * Update URI:        https://example.com/my-plugin/
+ * Update URI:        https://www.wooxperto.com/
  * Text Domain:       quickvariable
  * Domain Path:       /languages
  * Requires Plugins:   woocommerce
