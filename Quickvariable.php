@@ -1,6 +1,6 @@
 <?php
 /*
- * Plugin Name:       Quick Cart & Product Variations Table
+ * Plugin Name:       Product Variation Table With Quick Cart
  * Plugin URI:        https://example.com/plugins/the-basics/
  * Description:       Handle the quick woocommerce product variations in WP.
  * Version:           1.0.0
