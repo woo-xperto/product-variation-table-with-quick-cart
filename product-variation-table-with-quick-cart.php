@@ -176,7 +176,7 @@ final class QuickVariablePro{
         <?php
     }
 
-    /*Compatible With themes*/
+    /*Compatible With themes start*/
 
     public function custom_css_for_oceanwp(){
         if( wp_get_theme()->get('Name') === 'OceanWP' || wp_get_theme()->get('Name') === 'Kadence' ) {
