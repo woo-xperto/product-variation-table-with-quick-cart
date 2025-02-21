@@ -962,7 +962,7 @@ jQuery(document).ready(function () {
         success: function (response) {
           if (response.success) {
             $("#loading-spinner-pagination-table").hide();
-            $(".table-template-max-width").css("opacity", "1");
+            $("#quick-variable-table").css("opacity", "1");
             $table.find('tr.variation-row').remove();
             $table.append(response.data.html);
             totalPages = response.data.total_pages;
@@ -988,12 +988,7 @@ jQuery(document).ready(function () {
     $("#prevPage").click(function () {
 
       $("#loading-spinner-pagination-table").show();
-      $(".table-template-max-width").css("opacity", "0.5");
-
-      setTimeout(function() {
-        $("#loading-spinner-pagination-table").hide();
-        $(".table-template-max-width").css("opacity", "1");
-      }, 1000);
+      $("#quick-variable-table").css("opacity", "0.5");
 
       if (currentPage > 1) {
         currentPage--;
@@ -1005,11 +1000,6 @@ jQuery(document).ready(function () {
 
       $("#loading-spinner-pagination-table").show();
       $("#quick-variable-table").css("opacity", "0.5");
-
-      setTimeout(function() {
-        $("#loading-spinner-pagination-table").hide();
-        $("#quick-variable-table").css("opacity", "1");
-      }, 1000);
 
       if (currentPage < totalPages) {
         currentPage++;
