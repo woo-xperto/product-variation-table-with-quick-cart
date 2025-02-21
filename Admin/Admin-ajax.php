@@ -1,4 +1,5 @@
 <?php
+if ( ! defined( 'ABSPATH' ) ) exit;
 add_action('wp_ajax_quickAdminAjaxHandler', 'quickAdminAjaxHandler');
 add_action('wp_ajax_nopriv_quickAdminAjaxHandler', 'quickAdminAjaxHandler');
 
@@ -7,9 +8,15 @@ function quickAdminAjaxHandler() {
     check_ajax_referer('quick_admin_nonce', 'nonce', false);
 
     // Check if the data is being sent
-    if (isset($_POST['identifier']) && ($_POST['identifier']) == "adminSetting") {
+
+    if (isset($_POST['identifier'])) {
+
+        $identifier = sanitize_text_field(wp_unslash($_POST['identifier']));
+    }
+
+    if (isset($identifier) && ($identifier) == "adminSetting") {
         if (isset($_POST['variable_data']) && !empty($_POST['variable_data'])) {
-            $jsonData = wp_unslash($_POST['variable_data']); 
+            $jsonData = sanitize_text_field(wp_unslash($_POST['variable_data']));
             $jsonData = sanitize_text_field($jsonData);
 
             // Decode the JSON data
@@ -30,6 +37,15 @@ function quickAdminAjaxHandler() {
             echo "false"; 
         }
     }
-    
+    // Pro Activate
+    if (isset($_POST['identifier']) && sanitize_text_field(wp_unslash($_POST['identifier'])) === 'activationKey') {
+        $activateKey = isset($_POST['activation_key']) ? sanitize_text_field(wp_unslash($_POST['activation_key'])) : '';
+
+        if($activateKey){
+            quick_variable_license_key_get($activateKey);
+        }else{
+            echo "false";
+        }
+    }
     wp_die(); 
 }

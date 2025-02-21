@@ -1,87 +1,46 @@
 <?php
+if ( ! defined( 'ABSPATH' ) ) exit;
+
 global $product;
-if (isset($product) && $product->is_type("variable"))
-{ ?>
-<table id="quick-variable-table">
-<tr>
-<th>Image</th>
-<?php
-    $variations = $product->get_available_variations();
-    $attributes = $product->get_attributes();
+global $post;
+if (isset($product) && $product->is_type("variable")) {
+    $product_id                     = $product->get_id();
+    $enable_global_stock_management = $product->get_manage_stock();
+    $global_stock_quantity          = $enable_global_stock_management ? $product->get_stock_quantity() : null;
+    $all_attributes                 = $product->get_attributes();
+    $variableSetting                = get_option('variable_all_checked', array());
+    $quickTableOnOff                = isset($variableSetting['quickTableOnOff']) ? $variableSetting['quickTableOnOff'] : '';
+    $bulkSelectionHideShow          = isset($variableSetting['bulkSelectionHideShow']) ? $variableSetting['bulkSelectionHideShow'] : 'true';
+    $imageHideShow                  = isset($variableSetting['imageHideShow']) ? $variableSetting['imageHideShow'] : 'true';
+    $skuHideShow                    = isset($variableSetting['skuHideShow']) ? $variableSetting['skuHideShow'] : 'true';
+    $allAttributeHideShow           = isset($variableSetting['allAttributeHideShow']) ? $variableSetting['allAttributeHideShow'] : 'true';
+    $priceHideShow                  = isset($variableSetting['priceHideShow']) ? $variableSetting['priceHideShow'] : 'true';
+    $quantityHideShow               = isset($variableSetting['quantityHideShow']) ? $variableSetting['quantityHideShow'] : 'true';
+    $actionHideShow                 = isset($variableSetting['actionHideShow']) ? $variableSetting['actionHideShow'] : 'true';
+    $onSaleHideShow                 = isset($variableSetting['onSaleHideShow']) ? $variableSetting['onSaleHideShow'] : 'true';
+    $searchOptionHideShow           = isset($variableSetting['searchOptionHideShow']) ? $variableSetting['searchOptionHideShow'] : 'true';
+    $bulkAddToCartPosition          = isset($variableSetting['bulkAddToCartPosition']) ? $variableSetting['bulkAddToCartPosition'] : 'after';
+    $designSingleProductPageMobile  = isset($variableSetting['designSingleProductPageMobile']) ? $variableSetting['designSingleProductPageMobile'] : 'template_1';
+    $cartButtonText                 = isset($variableSetting['cartButtonText']) ? $variableSetting['cartButtonText'] : 'Add-to-cart';
+    $onSaleNameChange               = isset($variableSetting['onSaleNameChange']) ? $variableSetting['onSaleNameChange'] : 'On Sale';
+    $searchOptionTextChange         = isset($variableSetting['searchOptionTextChange']) ? $variableSetting['searchOptionTextChange'] : 'Search...';
+    $showPopUpImage                 = isset($variableSetting['showPopUpImage']) ? $variableSetting['showPopUpImage'] : 'true';
+    $variationGalleryOnOff          = isset($variableSetting['variationGalleryOnOff']) ? $variableSetting['variationGalleryOnOff'] : '';
+    $popUPImageShow                 = isset($variableSetting['popUPImageShow']) ? $variableSetting['popUPImageShow'] : 'default';
+    $titleHideShow                  = isset($variableSetting['titleHideShow']) ? $variableSetting['titleHideShow'] : 'true';
+    $descriptionHideShow            = isset($variableSetting['descriptionHideShow']) ? $variableSetting['descriptionHideShow'] : 'true';
+    $weightDimensionsHideShow       = isset($variableSetting['weightDimensionsHideShow']) ? $variableSetting['weightDimensionsHideShow'] : 'true';
+    $designAddCartTableTemplate2    = isset($variableSetting['designAddCartTableTemplate2']) ? $variableSetting['designAddCartTableTemplate2'] : 'template_1';
+    $selectAllNameChange            = isset($variableSetting['selectAllNameChange']) ? $variableSetting['selectAllNameChange'] : 'Select All';
+    $showDoublePrice                = isset($variableSetting['showDoublePrice']) ? $variableSetting['showDoublePrice'] : 'true';
+    $stockStatusHideShow            = isset($variableSetting['stockStatusHideShow']) ? $variableSetting['stockStatusHideShow'] : 'true';
+    $variationTableTemplate         = isset($variableSetting['variationTableTemplate']) ? $variableSetting['variationTableTemplate'] : 'template_1';
+    $variationTableMeta             = get_post_meta($post->ID, '_variation_table_meta', true);
+    $metaVariableTableTemplate      = get_post_meta($post->ID, '_variation_table_template', true);
+    $metaTableTemplate2CartStyle    = get_post_meta($post->ID, '_table_template2_cart_section_style_template', true);
 
-    foreach ($attributes as $key => $attribute)
-    {
-        // Access the protected data property to get attribute value
-        $reflection = new ReflectionClass($attribute);
-        $dataProperty = $reflection->getProperty("data");
-        $dataProperty->setAccessible(true);
-        $data = $dataProperty->getValue($attribute);
 
-        if (taxonomy_exists($key) && $data["variation"] == "1")
-        {
-            $taxonomy = get_taxonomy($key);
-            $label = str_replace("Product ", "", $taxonomy->label);
-            echo "<th>" . esc_html(ucfirst($label)) . "</th>";
-        }
-        elseif ($key && $data["variation"] == "1")
-        {
-            echo "<th>" . esc_html(ucfirst($key)) . "</th>";
-        }
+    if ($quickTableOnOff == 'true') {
+        include plugin_dir_path(__FILE__) . '../table-template/table-template1.php';
     }
 }
-?>
-<th>Price</th>
-<th>Quantity</th>
-<th>Action</th>
-</tr>
-
-<?php foreach ($variations as $var)
-{
-    $variation_id = $var['variation_id']; 
-    $variation = new WC_Product_Variation($variation_id);
-
-    $variation_stock_quantity = $variation->get_stock_quantity();
-    $attributes = $variation->get_variation_attributes();
-
-    // Get variation thumbnail image URL
-    $thumbnail_id = $variation->get_image_id();
-    $thumbnail_url = wp_get_attachment_image_src($thumbnail_id, "thumbnail");
-    $thumbnail_url = $thumbnail_url ? $thumbnail_url[0] : "";
-?>
-<tr>
-<td><img src="<?php echo esc_url($thumbnail_url); ?>" alt=""/></td><?php foreach ($attributes as $attribute)
-    {
-        // Convert to array
-        if (!is_array($attribute))
-        {
-            $attribute = ["value" => $attribute];
-        }
-
-        foreach ($attribute as $key => $value)
-        {
-            echo "<td class='quick-variable-title'>" . esc_html(htmlspecialchars($value)) . "</td>";
-        }
-    } ?>
-<td class='quick-variable-title'><?php echo _e($variation->get_price_html()); ?></td>
-<td> <!-- Quantity -->
-<div class="quick-quantity-container">
-    <button class="quick-quantity-decrease" id="decrease">-</button>
-    <input type="text" id="quantity" autocomplete="off" class="quick-quantity-input" value="1" data-max="<?php echo esc_attr($variation_stock_quantity); ?>">
-    <button class="quick-quantity-increase" id="increase">+</button>
-</div>
-<div class="quick-cart-notification quick-hidden"></div>
-</td>
-<td class="stock-notification"><?php if ($variation_stock_quantity > 0)
-    { ?>
-  <button class="quick-add-to-cart" data-productId="<?php echo esc_attr($product->get_id()); ?>" data-variationId="<?php echo esc_attr($variation_id); ?>"><i class="fa fa-cart-plus" aria-hidden="true"></i>Add-to-cart</button>
-  <?php
-    }
-    else
-    {
-        echo "<p>Out Of Stock</p>";
-    } ?>
-</td>
-</tr>
-<?php
-} ?>
-</table>
