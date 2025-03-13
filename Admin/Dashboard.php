@@ -374,7 +374,7 @@ $variationListTemplate                 = isset($variableSetting['variationListTe
                 <div class="quick-selectors-wrapper">
                     <div class="quick-carousel-autoplay">
                         <label class="switch">
-                            <input type="checkbox" name="quick-carousel-autoplay" <?php if( $quickCarouselAutoplay == "true" ): echo esc_attr("checked"); endif; ?>>
+                            <input type="checkbox" disabled>
                             <span class="slider round"></span>
                         </label>
                     </div>
@@ -394,7 +394,7 @@ $variationListTemplate                 = isset($variableSetting['variationListTe
                 <div class="quick-selectors-wrapper">
                     <div class="name-image-redirect">
                         <label class="switch">
-                            <input type="checkbox" name="name-image-redirect" <?php if( $nameImageRedirect == "true" ): echo esc_attr("checked"); endif; ?>>
+                            <input type="checkbox" disabled>
                             <span class="slider round"></span>
                         </label>
                     </div>
@@ -428,7 +428,7 @@ $variationListTemplate                 = isset($variableSetting['variationListTe
                     </div>
                     <div class="quick-hover-click">
                         <label class="switch">
-                            <input type="checkbox" value="variable-click" <?php if($variableHoverClick== "variable-click"): echo esc_attr("checked"); endif; ?>>
+                            <input type="checkbox" disabled>
                             <span class="slider round"></span>
                         </label>
                         <span><?php echo esc_html('On Click ','product-variation-table-with-quick-cart');
@@ -492,7 +492,7 @@ $variationListTemplate                 = isset($variableSetting['variationListTe
 
                     <div class="quick-box-content-click">
                         <label class="switch">
-                            <input type="checkbox" value="variable-excerpt-in-box" <?php if( !empty($variableDetailsExcerpt) ): echo esc_attr("checked"); endif; ?>>
+                            <input type="checkbox" disabled>
                             <span class="slider round"></span>
                         </label>
                         <span><?php echo esc_html('Excerpt ','product-variation-table-with-quick-cart');
@@ -578,7 +578,7 @@ $variationListTemplate                 = isset($variableSetting['variationListTe
                             ?></h4>
 
                         <div style="display: flex; gap: 80px;">
-                            <select id="pop-up-image-show" class="pop-up-image-show">
+                            <select disabled id="pop-up-image-show" class="pop-up-image-show">
 
 
                                 <?php
@@ -619,7 +619,7 @@ $variationListTemplate                 = isset($variableSetting['variationListTe
                                 ?></h4>
 
                             <div>
-                                <select id="select-design-variation-table-template" class="variation-table-template" style="outline: none">
+                                <select disabled id="select-design-variation-table-template" class="variation-table-template" style="outline: none">
                                     <option value="template_1" <?php selected($variationTableTemplate, 'template_1'); ?>><?php echo wp_kses('Template 1','product-variation-table-with-quick-cart');?></option>
                                     <option value="template_2" <?php selected($variationTableTemplate, 'template_2'); ?>><?php echo wp_kses('Template 2','product-variation-table-with-quick-cart');?></option>
                                 </select>
@@ -777,7 +777,7 @@ $variationListTemplate                 = isset($variableSetting['variationListTe
                                         echo "(Pro)";
                                     }
                                     ?></strong></label>
-                            <input id="bulk-add-cart-bg-color" name="bulk-add-cart-bg-color" value="<?php echo esc_attr( $bulkAddCartBgColor ); ?>"  data-jscolor="{}">
+                            <input id="bulk-add-cart-bg-color" disabled name="bulk-add-cart-bg-color" value="<?php echo esc_attr( $bulkAddCartBgColor ); ?>"  data-jscolor="{}">
                         </div>
                     </div>
 
@@ -788,7 +788,7 @@ $variationListTemplate                 = isset($variableSetting['variationListTe
                                         echo "(Pro)";
                                     }
                                     ?></strong></label>
-                            <input id="bulk-add-cart-text-color" name="bulk-add-cart-text-color" value="<?php echo esc_attr( $bulkAddCartTextColor ); ?>"  data-jscolor="{}">
+                            <input id="bulk-add-cart-text-color" disabled name="bulk-add-cart-text-color" value="<?php echo esc_attr( $bulkAddCartTextColor ); ?>"  data-jscolor="{}">
                         </div>
                     </div>
 
@@ -799,7 +799,7 @@ $variationListTemplate                 = isset($variableSetting['variationListTe
                                         echo "(Pro)";
                                     }
                                     ?></strong></label>
-                            <input id="bulk-add-cart-hover-bg-color" name="bulk-add-cart-hover-bg-color" value="<?php echo esc_attr( $bulkAddCartHoverBgColor ); ?>"  data-jscolor="{}">
+                            <input id="bulk-add-cart-hover-bg-color" disabled name="bulk-add-cart-hover-bg-color" value="<?php echo esc_attr( $bulkAddCartHoverBgColor ); ?>"  data-jscolor="{}">
                         </div>
                     </div>
 
@@ -810,7 +810,7 @@ $variationListTemplate                 = isset($variableSetting['variationListTe
                                         echo "(Pro)";
                                     }
                                     ?></strong></label>
-                            <input id="bulk-add-cart-hover-text-color" name="bulk-add-cart-hover-text-color" value="<?php echo esc_attr( $bulkAddCartHoverTextColor ); ?>"  data-jscolor="{}">
+                            <input id="bulk-add-cart-hover-text-color" disabled name="bulk-add-cart-hover-text-color" value="<?php echo esc_attr( $bulkAddCartHoverTextColor ); ?>"  data-jscolor="{}">
                         </div>
                     </div>
 
@@ -822,7 +822,7 @@ $variationListTemplate                 = isset($variableSetting['variationListTe
                                         echo "(Pro)";
                                     }
                                     ?></strong></label>
-                            <input id="on-sale-name-change" class="on-sale-name-change" type="text" name="on-sale-name-change" value="<?php echo esc_attr( $onSaleNameChange ); ?>"  >
+                            <input id="on-sale-name-change" class="on-sale-name-change" disabled type="text" name="on-sale-name-change" value="<?php echo esc_attr( $onSaleNameChange ); ?>"  >
                         </div>
                     </div>
 
@@ -833,7 +833,7 @@ $variationListTemplate                 = isset($variableSetting['variationListTe
                                         echo "(Pro)";
                                     }
                                     ?></strong></label>
-                            <input id="search-option-text-change" class="search-option-text-change" type="text" name="search-option-text-change" value="<?php echo esc_attr( $searchOptionTextChange ); ?>"  >
+                            <input id="search-option-text-change" class="search-option-text-change" disabled type="text" name="search-option-text-change" value="<?php echo esc_attr( $searchOptionTextChange ); ?>"  >
                         </div>
                     </div>
 
@@ -846,7 +846,7 @@ $variationListTemplate                 = isset($variableSetting['variationListTe
                         <div class="quick-selectors-wrapper">
                             <div class="show-popup-image">
                                 <label class="switch">
-                                    <input type="checkbox" name="show-popup-image" <?php if( $showPopUpImage == "true" ): echo esc_attr("checked"); endif; ?>>
+                                    <input type="checkbox" disabled>
                                     <span class="slider round"></span>
                                 </label>
                             </div>
@@ -862,7 +862,7 @@ $variationListTemplate                 = isset($variableSetting['variationListTe
                         <div class="quick-selectors-wrapper">
                             <div class="show-gallery-image-into-popup">
                                 <label class="switch">
-                                    <input type="checkbox" name="show-gallery-image-into-popup" <?php if( $showGalleyImageIntoPopup == "true" ): echo esc_attr("checked"); endif; ?>>
+                                    <input type="checkbox" disabled>
                                     <span class="slider round"></span>
                                 </label>
                             </div>
@@ -879,7 +879,7 @@ $variationListTemplate                 = isset($variableSetting['variationListTe
                         <div class="quick-selectors-wrapper">
                             <div class="bulk-selection-hide-show">
                                 <label class="switch">
-                                    <input type="checkbox" name="bulk-selection-hide-show" <?php if( $bulkSelectionHideShow == "true" ): echo esc_attr("checked"); endif; ?>>
+                                    <input type="checkbox" disabled>
                                     <span class="slider round"></span>
                                 </label>
                             </div>
@@ -919,7 +919,7 @@ $variationListTemplate                 = isset($variableSetting['variationListTe
                         <div class="quick-selectors-wrapper">
                             <div class="title-hide-show">
                                 <label class="switch">
-                                    <input type="checkbox" name="title-hide-show" <?php if( $titleHideShow == "true" || empty($titleHideShow) ): echo esc_attr("checked"); endif; ?>>
+                                    <input type="checkbox" disabled>
                                     <span class="slider round"></span>
                                 </label>
                             </div>
@@ -935,7 +935,7 @@ $variationListTemplate                 = isset($variableSetting['variationListTe
                         <div class="quick-selectors-wrapper">
                             <div class="description-hide-show">
                                 <label class="switch">
-                                    <input type="checkbox" name="description-hide-show" <?php if( $descriptionHideShow == "true" || empty($descriptionHideShow) ): echo esc_attr("checked"); endif; ?>>
+                                    <input type="checkbox" disabled>
                                     <span class="slider round"></span>
                                 </label>
                             </div>
@@ -952,7 +952,7 @@ $variationListTemplate                 = isset($variableSetting['variationListTe
                         <div class="quick-selectors-wrapper">
                             <div class="weight-dimension-hide-show">
                                 <label class="switch">
-                                    <input type="checkbox" name="weight-dimension-hide-show" <?php if( $weightDimensionsHideShow == "true" || empty($weightDimensionsHideShow) ): echo esc_attr("checked"); endif; ?>>
+                                    <input type="checkbox" disabled>
                                     <span class="slider round"></span>
                                 </label>
                             </div>
@@ -1006,7 +1006,7 @@ $variationListTemplate                 = isset($variableSetting['variationListTe
                         <div class="quick-selectors-wrapper">
                             <div class="stock-status-hide-show">
                                 <label class="switch">
-                                    <input type="checkbox" name="stock-status-hide-show" <?php if( $stockStatusHideShow == "true" || empty($stockStatusHideShow) ): echo esc_attr("checked"); endif; ?>>
+                                    <input type="checkbox" disabled>
                                     <span class="slider round"></span>
                                 </label>
                             </div>
@@ -1034,7 +1034,7 @@ $variationListTemplate                 = isset($variableSetting['variationListTe
                         <div class="quick-selectors-wrapper">
                             <div class="search-option-hide-show">
                                 <label class="switch">
-                                    <input type="checkbox" name="search-option-hide-show" <?php if( $searchOptionHideShow == "true" || empty($searchOptionHideShow) ): echo esc_attr("checked"); endif; ?>>
+                                    <input type="checkbox" disabled>
                                     <span class="slider round"></span>
                                 </label>
                             </div>
@@ -1050,7 +1050,7 @@ $variationListTemplate                 = isset($variableSetting['variationListTe
                         <div class="quick-selectors-wrapper">
                             <div class="on-sale-hide-show">
                                 <label class="switch">
-                                    <input type="checkbox" name="on-sale-hide-show" <?php if( $onSaleHideShow == "true" || empty($onSaleHideShow) ): echo esc_attr("checked"); endif; ?>>
+                                    <input type="checkbox" disabled>
                                     <span class="slider round"></span>
                                 </label>
                             </div>
@@ -1065,7 +1065,7 @@ $variationListTemplate                 = isset($variableSetting['variationListTe
                             ?></h4>
 
                         <div >
-                            <select id="table-position" class="bulk-add-to-cart-position">
+                            <select disabled id="table-position" class="bulk-add-to-cart-position">
                                 <option value="before" <?php selected($bulkAddToCartPosition, 'before'); ?>>Before Table</option>
                                 <option value="after" <?php selected($bulkAddToCartPosition, 'after'); ?>>After Table</option>
                                 <option value="both" <?php selected($bulkAddToCartPosition, 'both'); ?>>Both</option>
@@ -1084,7 +1084,7 @@ $variationListTemplate                 = isset($variableSetting['variationListTe
                                 ?></h4>
 
                             <div >
-                                <select id="select-design" class="design-single-product-page-mobile" style="outline: none">
+                                <select disabled id="select-design" class="design-single-product-page-mobile" style="outline: none">
                                     <option value="template_1" <?php selected($designSingleProductPageMobile, 'template_1'); ?>><?php echo wp_kses('Template 1','product-variation-table-with-quick-cart');?></option>
                                     <option value="template_2" <?php selected($designSingleProductPageMobile, 'template_2'); ?>><?php echo wp_kses('Template 2','product-variation-table-with-quick-cart');?></option>
                                     <option value="template_3" <?php selected($designSingleProductPageMobile, 'template_3'); ?>><?php echo wp_kses('Template 3','product-variation-table-with-quick-cart');?></option>
