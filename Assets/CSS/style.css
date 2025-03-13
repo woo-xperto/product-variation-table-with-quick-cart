@@ -505,7 +505,6 @@ button.quick-add-to-cart-shop-page {
 .table-template-max-width{
   width: 100%;
   display: block;
-  max-width: max-content;
   margin: auto;
   overflow: auto;
 }

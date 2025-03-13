@@ -171,7 +171,8 @@ if (isset($product) && $product->is_type("variable")) {
                     return strcmp($attrA, $attrB);
                 });
             }
-            $current_variations = array_slice($variations, 0, $tableRowPagination);
+            $ajax_variations    = $product->get_available_variations();
+            $current_variations = array_slice($ajax_variations, 0, $tableRowPagination);
 
             foreach ($current_variations as $var) {
                 $variation_id             = $var['variation_id'];
@@ -297,7 +298,7 @@ if (isset($product) && $product->is_type("variable")) {
 
         <!-- Pagination Controls -->
         <div id="pagination">
-            <button style="margin-right: 5px" id="prevPage"><?php esc_html_e('Previous', 'product-variation-table-with-quick-cart'); ?></button>
+            <button style="margin-right: 5px" id="prevPage" disabled><?php esc_html_e('Previous', 'product-variation-table-with-quick-cart'); ?></button>
             <button id="nextPage"><?php esc_html_e('Next', 'product-variation-table-with-quick-cart'); ?></button>
         </div>
     </div>
