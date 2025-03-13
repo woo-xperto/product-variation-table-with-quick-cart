@@ -938,12 +938,14 @@ jQuery(document).ready(function () {
   // Pagination, sorting for table 1
 
   jQuery(document).ready(function ($) {
-    var $table = $("#quick-variable-table");
+    if($('.table-template2').length === 0){
+      var $table        = $("#quick-variable-table");
+    }
     const rowsPerPage = $table.data('pagination-table') || 5;
-    const totalRows = $table.data('variation-count');
-    var currentPage = 1;
-    var totalPages = 1;
-    var productId = $table.data('product-id');
+    const totalRows   = $table.data('variation-count');
+    var currentPage   = 1;
+    var totalPages    = 1;
+    var productId     = $table.data('product-id');
 
     if (totalRows <= rowsPerPage) {
       $("#pagination").hide();
@@ -962,7 +964,6 @@ jQuery(document).ready(function () {
         success: function (response) {
           if (response.success) {
             $("#loading-spinner-pagination-table").hide();
-            $("#quick-variable-table").css("opacity", "1");
             $table.find('tr.variation-row').remove();
             $table.append(response.data.html);
             totalPages = response.data.total_pages;
@@ -988,10 +989,17 @@ jQuery(document).ready(function () {
     $("#prevPage").click(function () {
 
       $("#loading-spinner-pagination-table").show();
-      $("#quick-variable-table").css("opacity", "0.5");
+      $(".table-template-max-width").css("opacity", "0.5");
+
+      setTimeout(function() {
+        $("#loading-spinner-pagination-table").hide();
+        $(".table-template-max-width").css("opacity", "1");
+      }, 1000);
+
 
       if (currentPage > 1) {
         currentPage--;
+        resetCheckboxes()
         loadPage(currentPage);
       }
     });
@@ -1001,8 +1009,14 @@ jQuery(document).ready(function () {
       $("#loading-spinner-pagination-table").show();
       $("#quick-variable-table").css("opacity", "0.5");
 
-      if (currentPage < totalPages) {
+      setTimeout(function() {
+        $("#loading-spinner-pagination-table").hide();
+        $("#quick-variable-table").css("opacity", "1");
+      }, 1000);
+
+      if (currentPage) {
         currentPage++;
+        resetCheckboxes()
         loadPage(currentPage);
       }
     });
@@ -1044,8 +1058,17 @@ jQuery(document).ready(function () {
           cellB = $(b).find(".variable-sku").text().trim();
           return order === "asc" ? cellA.localeCompare(cellB, undefined, { numeric: true }) : cellB.localeCompare(cellA, undefined, { numeric: true });
         } else if (column === "price") {
-          cellA = parseFloat($(a).find(".variable-price").text().replace(/[^0-9.-]+/g, "")) || 0;
-          cellB = parseFloat($(b).find(".variable-price").text().replace(/[^0-9.-]+/g, "")) || 0;
+          let salePriceA    = a.querySelector('.variable-sale-price')?.textContent.trim();
+          let regularPriceA = a.querySelector('.variable-price')?.textContent.trim();
+          let salePriceB    = b.querySelector('.variable-sale-price')?.textContent.trim();
+          let regularPriceB = b.querySelector('.variable-price')?.textContent.trim();
+
+          // Convert prices to numbers, prioritize sale price if available
+          cellA = parseFloat(salePriceA?.replace(/[^0-9.]/g, '') || regularPriceA?.replace(/[^0-9.]/g, '') || 0);
+          cellB = parseFloat(salePriceB?.replace(/[^0-9.]/g, '') || regularPriceB?.replace(/[^0-9.]/g, '') || 0);
+
+          // cellA = parseFloat($(a).find(".variable-price").text().replace(/[^0-9.-]+/g, "")) || 0;
+          // cellB = parseFloat($(b).find(".variable-price").text().replace(/[^0-9.-]+/g, "")) || 0;
           return order === "asc" ? cellA - cellB : cellB - cellA;
         } else {
           cellA = $(a).find(`[data-attribute-name="${column}"]`).text().trim() || "";
@@ -1102,9 +1125,38 @@ jQuery(document).ready(function () {
       header.find(".dashicons").css("color", "#E5E5E5");
     }
 
-    if ($table.length > 0) {
-      loadPage(currentPage);
+    function updateBulkCheckbox() {
+      if ($('.bulk_cart:checked').length > 0) {
+        $('.bulk-add-to-cart').show();
+      } else {
+        $('.bulk-add-to-cart').hide();
+      }
     }
+
+    function resetCheckboxes() {
+      $('#bulk_checkbox_select_all').prop('checked', false);
+      $('.bulk_cart').prop('checked', false);
+      updateBulkCheckbox();
+    }
+
+    $('#bulk_checkbox_select_all').on('change', function () {
+      var isChecked = $(this).prop('checked');
+      $('.bulk_cart').prop('checked', isChecked);
+      updateBulkCheckbox();
+    });
+
+    $(document).on('change', '.bulk_cart', function () {
+      var allChecked = $('.bulk_cart').length === $('.bulk_cart:checked').length;
+      $('#bulk_checkbox_select_all').prop('checked', allChecked);
+      updateBulkCheckbox();
+    });
+
+
+    reapplySorting();
+
+    // if ($table.length > 0) {
+    //     loadPage(currentPage);
+    // }
   });
 
 
